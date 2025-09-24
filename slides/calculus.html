@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Killian O’Brien">
+  <title>6G4Z3006 Calculus</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../reveal.js2/dist/reset.css">
+  <link rel="stylesheet" href="../reveal.js2/dist/reveal.css">
+  <style>
+    .reveal .sourceCode {  /* see #7635 */
+      overflow: visible;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="../reveal.js2/dist/theme/killian.css" id="theme">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" data-background-color="rgb(0,47,108)" data-background-image="logowhite.png" data-background-position="95%
+5%" data-background-repeat="no-repeat" data-background-size="18%">
+  <h1 class="title">6G4Z3006 Calculus</h1>
+  <p class="author">Killian O’Brien</p>
+  <p class="date">September 2025</p>
+</section>
+
+<section id="the-module-essential-information" class="slide level2">
+<h2>The module | essential information</h2>
+<ul>
+<li>A 15-credit module in Semester 2.</li>
+<li>11 weeks of teaching:
+<ul>
+<li>One 2 hour lecture per week,</li>
+<li>One 1 hour tutorial per week.</li>
+</ul></li>
+<li>Assessment consists of
+<ul>
+<li>One 3 hour exam worth 100% of the unit mark.</li>
+</ul></li>
+</ul>
+</section>
+<section id="the-module-teaching-and-syllabus" class="slide level2">
+<h2>The module | Teaching and Syllabus</h2>
+<ul>
+<li>Teaching style a combination of
+<ul>
+<li>explanations of theory in the lecture,</li>
+<li>discussion of examples and applications of the theory in the
+lecture,</li>
+<li>directed student reading and study sessions using unit
+textbook,</li>
+<li>student discussion and work on example problems in the
+tutorial.</li>
+</ul></li>
+<li>Syllabus topics:
+<ul>
+<li>theory of <strong>real valued functions</strong> and their
+<strong>limiting behaviour</strong>,</li>
+<li><strong>differentiation</strong> and <strong>integration</strong> of
+single-variable functions,</li>
+<li><strong>meaning</strong> and <strong>applications</strong> of
+differentiation and integration,</li>
+<li>theory of convergence of <strong>sequences</strong> and
+<strong>series</strong>,</li>
+<li>introduction to rigorous mathematical argument and
+<strong>proof</strong>.</li>
+</ul></li>
+<li>An excellent free and open-source textbook that covers most of these
+topics is
+<ul>
+<li><a
+href="https://killianobrien.github.io/apex/output/html/apex-calculus.html"
+target="_blank"><em>APEX Calculus</em></a>, by Gregory Hartman et al. We
+shall refer to this and use its exercises etc in the module.</li>
+<li>The module is also supported by my own lecture notes and
+resources.</li>
+</ul></li>
+</ul>
+</section>
+<section id="calendar" class="slide level2">
+<h2>Calendar</h2>
+<table border="1" cellpadding="3" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th align="left" style="background-color: rgb(0, 0, 0);">
+<span style="color:#ffffff;">W/C Monday</span>
+</th>
+<th align="left" style="background-color: rgb(0, 0, 0);">
+<span style="color:#ffffff;">Week - by - week</span>
+</th>
+</tr>
+<tr>
+<td>
+01 - 26/01/26
+</td>
+<td>
+Sequences
+</td>
+</tr>
+<tr>
+<td>
+02 - 02/02/26
+</td>
+<td>
+Sequeces
+</td>
+</tr>
+<tr>
+<td>
+03 - 09/02/26
+</td>
+<td>
+Series
+</td>
+</tr>
+<tr>
+<td>
+04 - 16/02/26
+</td>
+<td>
+Series
+</td>
+</tr>
+<tr>
+<td>
+05 - 23/02/26
+</td>
+<td>
+Differentiation
+</td>
+</tr>
+<tr>
+<td>
+06 - 02/03/26
+</td>
+<td>
+Differentiation
+</td>
+</tr>
+<tr>
+<td>
+07 - 9/03/26
+</td>
+<td>
+Differentiation
+</td>
+</td>
+</tr>
+<tr>
+<td>
+08 - 16/03/26
+</td>
+<td>
+Integration
+</td>
+</tr>
+<tr>
+<td>
+09 - 23/03/26
+</td>
+<td>
+Integration
+</td>
+</tr>
+<tr>
+<td style="background-color: rgb(221, 221, 221);">
+03/04/2023
+</td>
+<td style="background-color: rgb(221, 221, 221); text-align: center;">
+<strong></strong>
+</td>
+</tr>
+<tr>
+<td style="background-color: rgb(221, 221, 221);">
+10/04/2023
+</td>
+<td style="background-color: rgb(221, 221, 221); text-align:center;">
+<strong>Easter Break</strong>
+</td>
+</tr>
+<tr>
+<td style="background-color: rgb(221, 221, 221);">
+17/04/2023
+</td>
+<td style="background-color: rgb(221, 221, 221); text-align:center;">
+<strong></strong>
+</td>
+</tr>
+<tr>
+<td>
+10 - 20/04/26
+</td>
+<td>
+Integration
+</td>
+</tr>
+<tr>
+<td>
+11 - 27/04/26
+</td>
+<td>
+Review
+</td>
+</tr>
+<tr>
+<td>
+04/05/26
+</td>
+<td>
+<span style="color:#d35400;">Assessment Week 1</span>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+11/05/26
+</td>
+<td>
+<span style="color:#d35400;">Assessment Week 2</span>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="if-we-have-time-." class="slide level2">
+<h2>If we have time ….</h2>
+<ul>
+<li>A short lecture on <a
+href="./OverhangingBlockStacks.pdf"><em>overhanging stacked
+blocks</em></a></li>
+</ul>
+</section>
+    </div>
+  </div>
+
+  <script src="../reveal.js2/dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="../reveal.js2/plugin/notes/notes.js"></script>
+  <script src="../reveal.js2/plugin/search/search.js"></script>
+  <script src="../reveal.js2/plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: true,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1920,
+
+        height: 1080,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 7.0e-2,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>
