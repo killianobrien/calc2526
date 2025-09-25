@@ -1,0 +1,2 @@
+\beamer@sectionintoc {1}{Building Challenge}{2}{0}{1}
+\beamer@sectionintoc {2}{Analyzing the solution}{4}{0}{2}
