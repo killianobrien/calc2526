@@ -122,6 +122,6 @@ title-slide-attributes:
 
 ## If we have time ....
 
-* A short lecture on [*overhanging stacked blocks*](./OverhangingBlockStacks.pdf)
+* A short lecture on [*overhanging stacked blocks*](./OverhangingBlockStacks.pdf){target="_blank"}
 
 
