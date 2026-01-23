@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Killian O’Brien">
+  <meta name="author" content="6G4Z3006 Calculus">
+  <title>Introduction to Calculus</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../reveal.js2/dist/reset.css">
+  <link rel="stylesheet" href="../reveal.js2/dist/reveal.css">
+  <style>
+    .reveal .sourceCode {  /* see #7635 */
+      overflow: visible;
+    }
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../reveal.js2/dist/theme/killian.css" id="theme">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" data-background-color="rgb(0,175,255)" data-background-image="logoblack.png" data-background-position="95%
+5%" data-background-repeat="no-repeat" data-background-size="18%">
+  <h1 class="title">Introduction to Calculus</h1>
+  <p class="author">Killian O’Brien</p>
+  <p class="author">6G4Z3006 Calculus</p>
+  <p class="date">Tutorial Week 01</p>
+</section>
+
+<section id="introduction-to-the-unit" class="slide level2">
+<h2>Introduction to the unit</h2>
+<ul>
+<li>Let’s look at the module’s
+<a href="https://moodle.mmu.ac.uk/course/view.php?id=194852" target="_blank">Moodle
+area.</a></li>
+</ul>
+</section>
+<section id="some-background-on-sqrt5" class="slide level2">
+<h2>Some background on <span
+class="math inline">\(\sqrt{5}\)</span></h2>
+<ul>
+<li>Your calculator/computer will tell you that <span
+class="math inline">\(\sqrt{5}\)</span> is <span
+class="math display">\[\sqrt{5} = 2.236067977 \dots.\]</span></li>
+<li>The decimal expansion will go on forever, any finite decimal
+expansion can only ever be an approximation to <span
+class="math inline">\(\sqrt{5}\)</span>.</li>
+<li><span class="math inline">\(\sqrt{5}\)</span> is an
+<strong>irrational</strong> number, i.e. it cannot be given as a ratio
+of integers, <span class="math inline">\(a/b\)</span>, where <span
+class="math inline">\(a,b \in \mathbb{Z}\)</span>.</li>
+<li>In fact, we can show (see the level 5 Number Theory and Abstract
+Algebra unit) that for every integer <span
+class="math inline">\(m\)</span>, its square root <span
+class="math inline">\(\sqrt{m}\)</span> will either be an integer
+itself, or if not, it will be irrational.</li>
+<li>However, it’s also true that any irrational number can be
+approximate arbitrarily closely by rationals.</li>
+<li>But in general, to get better and better rational approximations to
+an irrational, we will need larger and larger denominators.</li>
+</ul>
+</section>
+<section id="tutorial-intro-activity" class="slide level2">
+<h2>Tutorial intro activity</h2>
+<ul>
+<li>In this tutorial we will get a first look at the important concept
+of <strong>convergence of sequences</strong>.</li>
+<li>We’ll also see some examples of <strong>proof by
+induction</strong>.</li>
+<li>Don’t worry if these concepts are new and unfamiliar to you. This is
+a <em>first look</em>.</li>
+</ul>
+<h5 id="from-the-apex-calculus-textbook">From the APEX Calculus
+textbook</h5>
+<ul>
+<li>Let’s quickly read about
+<a href="https://killianobrien.github.io/apex/output/html/sec_newton.html#idea_Newton" target="_blank">Newton’s
+method</a> for finding roots/zeros of functions.</li>
+</ul>
+</section>
+<section
+id="approximating-sqrt5-with-newtons-method-and-recurrence-relations"
+class="slide level2">
+<h2>Approximating <span class="math inline">\(\sqrt{5}\)</span> with
+Newton’s method and recurrence relations</h2>
+<ul>
+<li>We want to approximate <span
+class="math inline">\(\sqrt{5}\)</span>, so we shall consider a function
+<span class="math inline">\(f\)</span>, defined by, <span
+class="math display">\[f(x) = x^2 - 5,\]</span> with an initial
+approximation of <span class="math inline">\(x_0 = 3\)</span>.</li>
+<li>This leads to an <strong>infinite sequence</strong> of values <span
+class="math display">\[x_0, x_1, x_2, x_3,  \dots,\]</span> with <span
+class="math inline">\(x_0=3\)</span>, satisfying the <strong>recurrence
+relation</strong> <span class="math display">\[ x_{n+1} = x_n -
+\frac{x_n^2 - 5}{2x_n}.\]</span></li>
+<li>This sequence <em>should</em> converge to <span
+class="math inline">\(\sqrt{5}\)</span>, i.e. <span
+class="math display">\[\lim_{n \to \infty} x_n = \sqrt{5}.\]</span> In
+this tutorial we will work towards a proof of this claim about this
+sequence.</li>
+</ul>
+</section>
+<section id="deriving-our-recurrence-relation" class="slide level2">
+<h2>Deriving our recurrence relation</h2>
+<ul>
+<li><strong>Task 1.</strong> Use Newton’s recurrence relation</li>
+</ul>
+<p><span class="math display">\[ x_{n+1} = x_n -
+\frac{f(x_n)}{f&#39;(x_n)},\]</span> to derive our recurrence relation
+<span class="math display">\[ x_{n+1} = x_n - \frac{x_n^2 -
+5}{2x_n}.\]</span></p>
+</section>
+<section id="from-x_0-to-x_1" class="slide level2">
+<h2>From <span class="math inline">\(x_0\)</span> to <span
+class="math inline">\(x_1\)</span></h2>
+<ul>
+<li><strong>Task 2.</strong> Confirm the equation of the first tangent
+line and confirm the value of <span class="math inline">\(x_1 =
+7/3\)</span>.</li>
+</ul>
+<p><img src="./images/newton.svg" alt="Newton's method" style="display:block;margin-left:auto;margin-right:auto;width:65%;"></p>
+</section>
+<section id="establishing-a-lower-bound-for-our-sequence"
+class="slide level2">
+<h2>Establishing a lower bound for our sequence</h2>
+<ul>
+<li><strong>Task 3.</strong> Take our recurrence relation and use it to
+show that for all <span class="math inline">\(m \geq 1\)</span> we have
+<span class="math inline">\(x_m &gt; 0\)</span>.</li>
+<li>Hints:
+<ul>
+<li>Rewrite the recurrence in the form <span
+class="math display">\[x_{n+1} = \frac{1}{2x_n} \Big ( \dots \Big
+)\]</span></li>
+<li>Then construct an argument that if <span class="math inline">\(x_n
+&gt; 0\)</span> then <span class="math inline">\(x_{n+1} &gt;
+0\)</span>.</li>
+<li>We can then use <em>proof by induction</em> to prove that the
+sequence is always positive.</li>
+</ul></li>
+<li><strong>Task 4.</strong> Now let’s improve the lower bound by
+showing that for all <span class="math inline">\(m \geq 1\)</span> we
+have <span class="math inline">\(x_m &gt; \sqrt{5}\)</span>.</li>
+<li>Hint:
+<ul>
+<li>Use the recurrence relation to find a nice expression for <span
+class="math inline">\(x_{n+1}^2\)</span> of the form <span
+class="math display">\[x_{n+1}^2 = 5 + \Big ( \dots \Big
+)^2\]</span></li>
+<li>Use proof by induction to prove that for all <span
+class="math inline">\(m \geq 1\)</span> we have <span
+class="math inline">\(x_m^2 &gt; 5\)</span>.</li>
+<li>Then use the result of Task 3 to deduce that in fact <span
+class="math inline">\(x_m &gt; \sqrt{5}\)</span>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="proving-the-sequence-is-decreasing" class="slide level2">
+<h2>Proving the sequence is decreasing</h2>
+<ul>
+<li><p><strong>Task 5.</strong> Now prove the sequence is decreasing,
+i.e. for all <span class="math inline">\(m \geq 1\)</span> we have <span
+class="math inline">\(x_m &gt; x_{m+1}\)</span>.</p></li>
+<li><p>Hint:</p>
+<ul>
+<li>Use the recurrence relation to get a nice expression for the
+difference <span class="math inline">\(x_{n+1} - x_n\)</span>.</li>
+<li>Use results of earlier tasks to get the decreasing conclusion.</li>
+</ul></li>
+<li><p><strong>Calling on some theory:</strong> For the next step we’ll
+need to rely on a theorem about the convergence of monotone (increasing
+or decreasing) bounded sequences. This is
+<a href="https://killianobrien.github.io/apex/output/html/sec_sequences.html#thm_monotonic_converge" target="_blank">Theorem
+9.1.32 in APEX Calculus.</a></p></li>
+<li><p>So now we know our sequence is convergent, i.e. it has a limit.
+Newton’s method claims that this limit should be <span
+class="math inline">\(\sqrt{5}\)</span>.</p></li>
+<li><p><strong>Task 6.</strong> Prove that our sequence converges to the
+limit <span class="math inline">\(\sqrt{5}\)</span>.</p></li>
+<li><p>Hints:</p>
+<ul>
+<li>Take the limit of both sides of the recurrence relation.</li>
+<li>Use some reasonable assumptions about how limits should behave.</li>
+<li>Deduce that our sequence converges to <span
+class="math inline">\(\sqrt{5}\)</span>. You will need to argue
+carefully about the positive or negative square root.</li>
+</ul></li>
+</ul>
+</section>
+<section id="applying-our-results" class="slide level2">
+<h2>Applying our results</h2>
+<ul>
+<li><strong>Task 7.</strong></li>
+<li>Now use our recurrence relation to generate a sequence of better and
+better rational approximations to <span
+class="math inline">\(\sqrt{5}\)</span>.</li>
+<li>Hint:
+<ul>
+<li>program the recurrence relation into a Python loop.</li>
+</ul></li>
+</ul>
+</section>
+    </div>
+  </div>
+
+  <script src="../reveal.js2/dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="../reveal.js2/plugin/notes/notes.js"></script>
+  <script src="../reveal.js2/plugin/search/search.js"></script>
+  <script src="../reveal.js2/plugin/zoom/zoom.js"></script>
+  <script src="../reveal.js2/plugin/math/math.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: true,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1920,
+
+        height: 1080,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 7.0e-2,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>
