@@ -1,0 +1,1 @@
+{"key":"build_command","value":["latexmk","-pdf","-f","-deps","-g","-bibtex","-synctex=1","-interaction=nonstopmode","tutorial-sheet-04-differential-calculus.tex"]}

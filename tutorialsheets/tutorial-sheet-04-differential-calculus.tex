@@ -1,0 +1,250 @@
+\documentclass[10pt]{memoir}
+\usepackage{tutorials}
+%\renewcommand{\familydefault}{\sfdefault}
+\usepackage[T1]{fontenc}       % change font encoding to T1
+%\documentclass[oneside,10pt]{amsart}
+\usepackage{tutorials}
+
+% for visibility of solutions
+\showtrue
+% \showfalse
+
+\newcounter{pass}
+\setcounter{pass}{0}
+
+\begin{document}
+\tuttitle{Tutorial Questions 04 -- The derivative}{Dr Killian O'Brien}{6G4Z3006 Calculus}{\today}
+
+\topic{Continuity}
+\begin{enumerate}
+\setcounter{enumi}{\value{pass}}
+\item
+\textbf{Quotient case of theorem 4.3:} Suppose $g(x)$ is non-zero in some interval of the domain containing the point $a$ and that $g$ and another function $f$ are continuous at $a$. Prove that the quotient function $f/g$ defined by $(f/g)(x) = f(x)/g(x)$ is continuous at $x=a$. You should follow the principles used for the similar result of the quotient case of the algebra of limits theorem for quotients.
+
+\begin{solution}
+Since we already know that continuity is preserved by products of functions, to prove that $f/g$ is continuous if $f$ and $g$ are we only have to prove that the reciprocal part $1/g$ is continuous as the quotient $f/g$ can be expressed as the product $f/g = f \times (1/g)$.
+
+So we assume that $g(a) \neq 0$ and that $g$ is continuous at $a$ and that $\epsilon>0$ is given. As $g$ is continuous at $a$ we can also assume that $g$ is non-zero in some interval centred at $a$ (more on this later). Notice the relations
+$$|1/g(x) - 1/g(a)|=\left | \frac{g(a)-g(x)}{g(x)g(a)} \right | = \frac{1}{|g(x)||g(a)|} |g(x) - g(a)|.$$
+
+So to constrain the size of $|1/g(x) - 1/g(a)|$ we need to constrain the size of $|g(x) - g(a)|$ (which we can do with our freedom to choose $\delta$) and prevent the denominator $|g(x)||g(a)|$ from getting too small, i.e. find a lower bound for it (which we can do using the continuity of $g$).
+
+We know there exists $\delta_1>0$ such that if $|x-a|<\delta_1$ then $|g(x) - g(a)| < |g(a)|/2$ which implies $$|g(x)| > \frac{|g(a)|}{2}.$$
+
+We also know there exists $\delta_2>0$ so that is $|x-a| < \delta_2$ then
+$$|g(x)-g(a)| < \frac{ \epsilon |g(a)|^2}{2}.$$
+Now let $\delta = \min(\delta_1, \delta_2)$ so that if $|x-a| < \delta$ we have both the above inequalities and we can say
+$$|1/g(x) - 1/g(a)| < \frac{2}{|g(a)||g(a)|} \frac{ \epsilon |g(a)|^2}{2} = \epsilon,$$
+as required for $1/g$ to be continuous at $a$.
+
+\end{solution}
+
+\item
+Use the formal definition of continuity to show that the function $f(t) =t^2$ is continuous at every point in its domain.
+\begin{solution}
+Let $a \in \mathbb{R}$ and let $\epsilon >0$ be given. We need to constrain the size of $|t^2 - a^2|$ using our ability to constrain the size of $|t - a|$ with our freedom to choose any $\delta > 0$. Notice the following relations
+\begin{align*}
+|t^2 - a^2| &= |(t-a)(t+a)| \\
+&= |t-a||t+a| \\
+&= |t-a||t-a + 2a| \\
+&\leq |t-a|\left ( |t-a| + 2 |a| \right )\\
+&= |t-a|^2 + 2|a||t-a|.
+\end{align*}
+So as long as we choose $\delta < \min(\sqrt{\epsilon/2},\epsilon/(4a))$, say for instance choose
+$$\delta = \frac{1}{3} \min(\sqrt{\epsilon/2},\epsilon/(4a)),$$
+then we will have
+$$|t^2 - a^2| < (\sqrt{\epsilon/2})^2 + 2|a| (\epsilon/(4a))=\epsilon/2 + \epsilon/2 = \epsilon,$$
+as required. So we can conclude that $f(t)=t^2$ is continuous at this $a$ and hence everywhere.
+
+Another approach to this would be to use the fact that the function $f(t) = t$ is continuous everywhere (which is much easier to prove) and then use the product form of theorem 4.3 to conclude that $t^2 = t \cdot t$ is also continuous.
+
+\end{solution}
+
+\setcounter{pass}{\value{enumi}}
+\end{enumerate}
+
+
+
+
+
+
+\topic{The derivative}
+\begin{enumerate}
+\setcounter{enumi}{\value{pass}}
+\item
+Can you confidently quote the limit definition of the derivative from memory? Can you confidently quote it using different notation than the usual $f$ and $x$? For instance what is the definition for the derivative of a function $\lambda$ of a real variable $y$ at a point $c$ of its domain?
+\begin{solution}
+The definition would be
+$$\left. \frac{d \lambda}{dy} \right |_{y=c} = \lim_{y \to c} \frac{\lambda(y) - \lambda(c)}{y-c}.$$
+Or in the alternative form,
+$$\left. \frac{d \lambda}{dy} \right |_{y=c} = \lim_{h \to 0} \frac{\lambda(c+h) - \lambda(c)}{h}.$$
+\end{solution}
+\item
+Use the limit definition of the derivative to obtain the derivative of the function defined by $g(t) = t^5$.
+\begin{solution}
+\begin{align*}
+g'(a) &= \lim_{t \to a} \frac{t^5 - a^5}{t-a}\\
+&=\lim_{t \to a} \frac{(t-a)(t^4 + t^3a + t^2a^2 + ta^3 + a^4)}{t-a}\\
+&=\lim_{t \to a} (t^4 + t^3a + t^2a^2 + ta^3 + a^4)\\
+&= 5a^4
+\end{align*}
+This holds for each $a$ so the derivative function is $g'(t)=5t^4$.
+\end{solution}
+\item
+Generalise the previous question to show that for each $n>0$ if $h(t) = t^{n}$ then $h'(t) = n t^{n-1}$.
+\begin{solution}
+\begin{align*}
+h'(a) &= \lim_{t \to a} \frac{t^n- a^n}{t-a}\\
+&=\lim_{t \to a} \frac{(t-a)\left (\sum_{j=0}^{n-1} a^jt^{n-1-j} \right )}{t-a}\\
+&=\lim_{t \to a} \left (\sum_{j=0}^{n-1} a^jt^{n-1-j} \right )\\
+&= na^{n-1}
+\end{align*}
+This holds for each $a$ so the derivative function is $h'(t)=nt^{n-1}$.
+\end{solution}
+\item
+Use the limit definition of the derivative to obtain the derivative of the function defined by $h(t) = t^{-2}$.
+\begin{solution}
+\begin{align*}
+h'(a) &= \lim_{t \to a} \frac{1/t^2 - 1/a^2}{t-a}\\
+&=\lim_{t \to a} \frac{(a^2-t^2)/t^2a^2}{t-a}\\
+&=\lim_{t \to a} \frac{-(a+t)}{t^2a^2}\\
+&= \frac{-2a}{a^4}\\
+&=\frac{-2}{a^3}
+\end{align*}
+This holds for each $a$ so the derivative function is $h'(t)=-2t^{-3}$.
+\end{solution}
+
+\item
+Generalise the previous question to show that for each $n>0$ if $h(t) = t^{-n}$ then $h'(t) = -n t^{-n-1}$.
+\begin{solution}
+\begin{align*}
+h'(a) &= \lim_{t \to a} \frac{1/t^n - 1/a^n}{t-a}\\
+&=\lim_{t \to a} \frac{(a^n-t^n)/t^na^n}{t-a}\\
+&=\lim_{t \to a} \frac{-\left (\sum_{j=0}^{n-1} a^jt^{n-1-j} \right )}{t^na^n}\\
+&= \frac{-na^{n-1}}{a^{2n}}\\
+&=\frac{-n}{a^{n+1}}
+\end{align*}
+This holds for each $a$ so the derivative function is $h'(t)=-nt^{-n-1}$.
+\end{solution}
+
+\item
+What does the product rule look like for products of three or more functions? That is, suppose functions $f,g,h$ are all differentiable at a point $x=a$. Find an expression for the derivative at $a$ of the product function $fgh$ defined by $(fgh)(x)=f(x)g(x)h(x)$, Your expression will feature the derivatives $f'(a), g'(a),h'(a)$ and the values $f(a),g(a),h(a)$. What about a product of four functions? Or for a general product of $n$ functions, i.e. the function defined by
+$$(f_1 f_2 \dots f_n)(x) =  f_1(x) f_2(x) \dots f_n(x),$$
+or expressed using the Pi product notation
+$$\left ( \prod_{i=1}^n f_i \right ) (x) = \prod_{i=1}^n f_i(x) .$$
+\begin{solution}
+For three functions we have
+\begin{align*}
+(fgh)'(a) &= ((fg)h)'(a) \\
+&=(fg)(a)h'(a) + (fg)'(a)h(a)\\
+&=f(a)g(a)h'(a) + \big (f(a)g'(a) + f'(a)g(a)\big )h(a) \\
+&= f(a)g(a)h'(a) + f(a)g'(a)h(a) + f'(a)g(a)h(a).
+\end{align*}
+So we get a sum of three terms, in each term we have a product of three factors which are the various combinations of one of the functions differentiated and the rest not, and all aevaluated at $a$.
+
+This pattern is replicated for products of any number of functions. This result can be proved formally using proof by induction, with the original two-factor product rule as the base case. We can write the result as
+$$\left ( \prod_{i=1}^n f_i \right )' (a) = \sum_{i=1}^n \left ( f'_i(a) \left ( \prod_{\overset{j=1}{j \neq i}}^n f_j (a) \right ) \right ).$$
+
+\end{solution}
+\newpage
+\item
+In a similar spirit to the previous question, what does the chain rule look like for compositions of three or more functions? For instance, what is the derivative of $f \circ g \circ h$ at a point $x=a$, how does it depend on various information about the component functions $f,g,h$. We can assume that $f,g,h$ are differentiable everywhere.
+
+Can you generalise to the case of a composition of $n$ functions, where $n$ could be any positive integer?
+
+\begin{solution}
+For three functions we have
+\begin{align*}
+(f\circ g \circ h)'(a) &= ((f\circ g)\circ h)'(a) \\
+&= (f\circ g)'\big (h(a)\big ) h'(a)\\
+&=f'(g(h(a)))g'(h(a))h'(a) .
+\end{align*}
+
+\end{solution}
+\item
+Use properties of the derivative and results from the table of derivatives to obtain the derivatives of the following functions.
+\begin{enumerate}
+\item
+$f(x) = x^5 + 3x^4 - 5x^2 + 10$
+\item
+$g(x) = 3 x^{1/2} - x^{3/2} + 2x^{-1/2}$
+\item
+$\lambda(t) = \sqrt{3t} + 3 \sqrt{t\,}$
+\item
+$\mu(y) = (2 + 5y + 1/2 y^2)^{1/2}$
+\item
+$\phi(z) = (z+1) \sqrt{z^4 - 2z +2}$
+\item
+$h(x) = x / \sqrt{1 - 4x^2}$
+\item
+$p(x) = \sqrt{1 + \sqrt{x}}$
+\end{enumerate}
+\begin{sagesilent}
+var('t,x,y,z')
+fa=x^5 + 3*x^4 - 5*x^2 + 10
+fb=3*x^(1/2) - x^(3/2) + 2*x^(-1/2)
+fc=sqrt(3*t)+3*sqrt(t)
+fd=(2 + 5*y + 1/2 *y^2)^(1/2)
+fe=(z+1)*sqrt(z^4 - 2*z +2)
+ff=x / sqrt(1 - 4*x^2)
+fg = sqrt(1 + sqrt(x))
+\end{sagesilent}
+\begin{solution}
+The derivatives are
+\begin{enumerate}
+\item
+$\sage{diff(fa,x)(x)}$
+\item
+$\sage{diff(fb,x)(x)}$
+\item
+$\sage{diff(fc,t)(t)}$
+\item
+$\sage{diff(fd,y)(y)}$
+\item
+$\sage{diff(fe,z)(z)}$
+\item
+$\sage{diff(ff,x)(x)}$
+\item
+$\sage{diff(fg,x)(x)}$
+\end{enumerate}
+\end{solution}
+
+\item
+Using geometric arguments it can be shown that
+$$ \lim_{h \to 0} \frac{\sin(h)}{h} = 1 \text{ and } \lim_{h \to 0} \frac{1-\cos(h)}{h} = 0.$$
+Use these results and the relation $\sin(A+B) = \cos(A)\sin(B) + \sin(A)\cos(B)$ to carry out the limit definition of the derivative and show that
+$$\frac{d}{dx} \sin(x) = \cos(x) \text{ and } \frac{d}{dx}{ \cos(x)} = -\sin(x).$$
+Many other derivatives of trigonometric functions can be obtained by combining these results with other properties of the derivative.
+\begin{solution}
+\begin{align*}
+\left. \frac{d}{dx} \sin(x) \right |_{x=a}
+&= \lim_{h \to 0} \frac{\sin(a+h) - \sin(a)}{h}\\
+&= \lim_{h \to 0} \frac{\cos(a)\sin(h) + \sin(a)\cos(h) - \sin(a)}{h}\\
+&=\cos(a) \left ( \lim_{h \to 0} \frac{\sin(h)}{h} \right ) + \sin(a) \lim_{h \to 0} \frac{\cos(h) - 1}{h}\\
+&= \cos(a), \text{ from given limits}.
+\end{align*}
+
+\end{solution}
+\setcounter{pass}{\value{enumi}}
+\end{enumerate}
+%\topic{Further techniques of differentiation}
+%\begin{enumerate}
+%\setcounter{enumi}{\value{pass}}
+%\item
+%If $f$ is the function defined on the domain $x>0$ by $f(x) = x^2$, what is the definition of the inverse function $f^{-1}$? Obtain the derivatives of $f$ and $f^{-1}$. For some example evaluations $b=f(a)$ confirm that $f'(a)= 1/(f^{-1})'(b)$ as expected from the principle of derivatives of inverse functions.
+%\item
+
+%\setcounter{pass}{\value{enumi}}
+%\end{enumerate}
+%\topic{Taylor series}
+%
+%
+%\topic{Stationary points and optimization}
+%
+%
+%\topic{Curve sketching}
+%
+%
+%\topic{Kinematics}
+
+\end{document}

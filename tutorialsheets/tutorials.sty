@@ -1,0 +1,61 @@
+\usepackage[paper=a4paper,top=3cm, bottom=3cm,left=3cm,right=3cm]{geometry}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{setspace}
+\usepackage{xcolor}
+\usepackage{graphicx}
+%\usepackage{sidenotes}
+\usepackage{hyperref}
+\usepackage{sagetex}
+\usepackage{mathtools}
+\usepackage[most]{tcolorbox}
+\usepackage{calc}
+\usepackage[ddmmyy]{datetime}
+\usepackage{environ}
+\usepackage{float}
+
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{\smallskipamount}
+\setlength\itemsep{3em}
+
+\newdimen\cboxwidth
+\def\setcboxwidth{\cboxwidth=\linewidth\advance\cboxwidth by -6pt\relax}
+
+%a background shaded textbox with white text. spans the width of the textarea
+%\newcommand{\cbox}[1]{\setcboxwidth\colorbox{black}{\begin{minipage}{\cboxwidth}\color{white}\sffamily #1 \end{minipage}}}
+\newcommand{\cbox}[1]{\begin{tcolorbox}[left=0.5mm,right=0.5mm,top=0.5mm,bottom=0.5mm, boxsep=2pt, boxrule=0pt,colback=black]\color{white}\sffamily #1 \end{tcolorbox}}
+
+% gray background box
+\newcommand{\gbox}[1]{\colorbox{gray!30}{\setcboxwidth\begin{minipage}{\cboxwidth}\color{black} #1 \end{minipage}}}
+
+%sheet title banner, uses \cbox, 4 arguments: top left, top right, bottom left, bottom right
+\newcommand{\tuttitle}[4]{\cbox{\textbf{#1} \hfill {#2}\\{#3} \hfill {\small #4}}\vskip 12pt}
+
+%topic banner
+\newcommand{\topic}[1]{\bigbreak\cbox{\textbf{#1}}\smallskip}
+
+%subtopic banner
+\newcommand{\subtopic}[1]{\tcbox[nobeforeafter, left=0mm,right=10mm,top=0.5mm,bottom=0mm, boxsep=2pt, boxrule=0pt,colback=black!50]{\color{white}\sffamily #1}\\}
+
+%caption
+\newcommand{\captn}[1]{\medbreak\leftline{\textbf{#1}}\nobreak}
+
+%computer icon
+\newcommand{\comp}{\begin{marginfigure}\includegraphics[scale=0.08]{comp.png}\end{marginfigure}}
+
+%solution environments
+\newif\ifshow
+\showtrue
+%\showfalse % comment out this line to reveal solutions
+
+\definecolor{block-gray}{gray}{0.85}
+\newtcolorbox{sol}{colback=block-gray,grow to right by=-5mm,grow to left by=-5mm, boxrule=0pt,boxsep=0pt,breakable}
+
+\NewEnviron{solution}{
+  \ifshow
+  \begin{sol}
+  \textbf{Solution:}\\
+  \BODY
+  \end{sol}
+  \fi}

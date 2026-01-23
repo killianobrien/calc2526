@@ -1,0 +1,276 @@
+\documentclass[oneside,10pt]{amsart}
+\usepackage[paper=a4paper,top=1.2cm, bottom=1.2cm,left=1cm,right=4cm]{geometry}
+\usepackage{setspace}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{sidenotes}
+\usepackage{hyperref}
+\usepackage{sagetex}
+\usepackage{mathtools}
+\usepackage[most]{tcolorbox}
+\usepackage{environ}
+\usepackage{float}
+
+\setlength{\parindent}{0cm}
+\setlength\itemsep{3em}
+%a background shaded textbox with white text. spans the width of the textarea
+\newcommand{\cbox}[1]{\colorbox{black}{\begin{minipage}{\linewidth}\color{white}\sffamily #1 \end{minipage}}}
+
+%sheet title banner, uses \cbox
+\newcommand{\tuttitle}[4]{\cbox{\textbf{#1} \hfill {#2}\\{#3} \hfill {\Small #4}}}
+
+%topic banner
+\newcommand{\topic}[1]{\cbox{\textbf{#1}}}
+
+%computer icon
+\newcommand{\comp}{\begin{marginfigure}\includegraphics[scale=0.08]{comp.png}\end{marginfigure}}
+
+\newcounter{pass}
+
+%solution environments
+\newif\ifshow
+\showtrue
+\showfalse % comment out this line to reveal solutions
+
+\definecolor{block-gray}{gray}{0.85}
+\newtcolorbox{sol}{colback=block-gray,grow to right by=-5mm,grow to left by=-5mm, boxrule=0pt,boxsep=0pt,breakable}
+
+\NewEnviron{solution}{
+  \ifshow
+  \begin{sol}
+  \textbf{Solution:}\\
+  \BODY
+  \end{sol}
+  \fi}
+
+%\newenvironment{solution}{\begin{sol}}{\end{sol}}
+
+%\usepackage{mathpazo}
+%\usepackage{arevtext,arevmath}
+%\usepackage[lining, sfdefault, light, medium]{FiraSans}
+%\usepackage{FiraMono}
+%\firalining
+
+\setlength\itemsep{3em}
+\begin{document}
+\tuttitle{Tutorial Questions 03 -- Functions}{Dr Killian O'Brien}{6G4Z3006 Calculus}{\today}
+\vskip 8pt
+When possible you should work on the questions in advance and be prepared for discussions on them with your colleagues and tutor. Some questions are straightforward calculation while others require more discussion and thought. The computer icon \includegraphics[scale=0.08]{comp.png} indicates where computer calculation, plotting or programming may be of use.
+
+Further questions can be found in the lecture notes as well as the recommended unit resources (see Moodle).
+
+\vskip 8pt
+\topic{Domains and co-domains}
+\begin{enumerate}
+\item
+\label{Q:domcodom}
+\comp
+Consider a function $\phi: X \to Y$, where $X,Y$ are subsets of $\mathbb{R}$, defined by the formula
+$$\phi(x) = \frac {x^2 + 1}{2x - 3}.$$
+Can you choose the subsets $X$ and $Y$ so that the function $\phi$ is variously
+\begin{enumerate}
+\item
+injective and surjective, (i.e. bijective)
+\item
+surjective but not injective,
+\item
+injective but not surjective,
+\item
+neither injective nor surjective.
+\end{enumerate}
+If $X$ and $Y$ are both the empty set, i.e. $X=Y=\{\}$, is $\phi$ injective and/or surjective?
+\begin{solution}
+One way to approach this is to view a plot of the graph of $\phi$. There is a singularity at $x=3/2$ and plotting it either side of that indicates the general behaviour
+\begin{center}
+\sageplot[width=.8\textwidth]{plot((x^2+1)/(2*x - 3), (x,-5,1.4), color='black')}\\
+{Fig: The graph of $\phi$ to the left of $3/2$.}
+\vskip 0.5cm
+
+\sageplot[width=.8\textwidth]{plot((x^2+1)/(2*x - 3), (x,1.6,5), color='black')}\\
+{Fig: The graph of $\phi$ to the right of $3/2$.}
+\end{center}
+
+As well as the singularity at $x=3/2$ there appear to be two turning points to either side of this as well. The plots show that there is an interval of values surrounding $0$ which do not occur as values of the function. We can identify these by consider when solutions exist to
+$$y = f(x) = \frac {x^2 + 1}{2x - 3}.$$
+This is equivalent to
+$$x^2 - 2xy + 1+ 3y =0.$$
+Considering this as a quadratic in $x$ it will fail to have any solution(s) if and only if its discriminant is negative, i.e.
+$$4y^2 - 4(1+3y) < 0$$
+which is equivalent to
+$$y^2 - 3y -1 <0.$$
+
+\begin{center}
+\sageplot[width=.8\textwidth]{plot(x^2 - 3*x -1, (x,-5,5), color='black')}\\
+{Fig: The plot of $y^2 - 3y-1$}
+\end{center}
+
+From the plot we see that $y^2 - 3y -1$ is negative between its two zeroes which are at
+$$y=3/2 \pm \frac{1}{2} \sqrt{13} \approx 3.303, -0.303.$$
+So the interval between these values can inform our choices for the co-domain concerning surjectivity and the location of the turning points of $\phi$ which are at the zeroes of $\frac{d \phi}{dx} = \frac{2 \, {\left(x^{2} - 3 \, x - 1\right)}}{{\left(2 \, x - 3\right)}^{2}}$ which are also
+$3/2 \pm \frac{1}{2} \sqrt{13}$, these can inform our choices of domain concerning injectivity.
+
+So some choices for $\phi:X \to Y$ are
+\begin{enumerate}
+\item
+injective and surjective, (i.e. bijective)
+$$X=(-4,-3), \quad Y=(\phi(-4), \phi(-3)) = (-17/11, -10/9)$$
+\item
+surjective but not injective, (we simply enlarge the domain slightly to include the turning point and some points beyond it, note that maximum value achieved at the turning point is $y_0 = 3/2 - \frac{1}{2} \sqrt{13} \approx -0.303$,
+$$X=(-4,0), \quad Y=(\phi(-4), y_0].$$
+\item
+injective but not surjective, (take our injective \& surjective example above and extend the co-domain to destroy the surjectivity)
+$$X=(-4,-3), \quad Y=\mathbb{R}.$$
+\item
+neither injective nor surjective.
+$$X = \mathbb{R} \backslash \left \{\frac{3}{2} \right \}, \quad Y = \mathbb{R}.$$
+\end{enumerate}
+\end{solution}
+
+\item
+\comp
+For a function $\psi : X \to Y$ defined by $\psi(x)=\tan(x)$ answer parts (a) - (d) of question \ref{Q:domcodom}.
+\begin{solution}
+Relevant facts about $\tan(x)$ are that it is periodic with period $\pi$, it has singularities at every odd multiple of $\pi/2$ and over the range $\pi/2 < x < \pi/2$ it takes on every value from $\mathbb{R}$.
+
+\begin{center}
+\sageplot[width=.8\textwidth]{plot(tan(x), (x,-pi/2+0.1,pi/2 - 0.1), color='black', ticks=pi/4, tick_formatter=pi)}\\
+{Fig: The plot of $\tan(x)$}
+\end{center}
+
+With these facts in mind we give example domains and co-domains
+\begin{enumerate}
+\item
+injective and surjective, (i.e. bijective)
+$$X = (-\pi/2, \pi/2), \quad Y=\mathbb{R},$$
+\item
+surjective but not injective,
+$$X = (-\pi/2, \pi/2) \cup (\pi/2, 3\pi/2), \quad Y=\mathbb{R},$$
+\item
+injective but not surjective,
+$$X=(0,\pi/2), \quad Y=\mathbb{R},$$
+\item
+neither injective nor surjective,
+$$X=(0,\pi/2) \cup (\pi, 3\pi/2), \quad Y=\mathbb{R}.$$
+\end{enumerate}
+
+\end{solution}
+
+\item
+Any $n \times m$ matrix $A$ will determine a function (called a linear transformation) $T_A : \mathbb{R}^m \to \mathbb{R}^n$ defined by
+$$T_A (\mathbf{x}) = A\mathbf{x} ,$$
+where $A\mathbf{x}$ denotes the left-multiplication of the column vector $\mathbf{x}$ by the matrix $A$, and $\mathbb{R}^m$ denotes the set (actually a vector space) of all $m$-component column vectors, and likewise for $\mathbb{R}^n$. You will learn more about such linear transformations later in your Linear Algebra lectures. For now, for some small values of $n$ and $m$, can you exhibit matrices $A$ such that the linear transformations $T_A$ will be
+
+\begin{enumerate}
+\item
+injective and surjective, (i.e. bijective)
+\item
+surjective but not injective,
+\item
+injective but not surjective,
+\item
+neither injective nor surjective.
+\end{enumerate}
+\begin{solution}
+This question should become a lot easier after you have studied matrices and their link to linear transformations later in the Linear Algebra unit. But you should have enough in the statement of the question and your current knowledge of matrices to address the injectivity and surjectivity of these maps.
+
+Some possible choices for $A$ are
+\begin{enumerate}
+\item
+injective and surjective, (i.e. bijective)
+$$n=m=2, \text{ and } A = \begin{pmatrix} 1 & 0 \\0 & 1 \end{pmatrix}, \text{ i.e. the identity map,}$$
+or perhaps a more interesting non-trivial example is rotation about the origin counter-clockwise by the angle $\theta$ which is
+$$A = \begin{pmatrix}\begin{array}{lr} \cos(\theta) & -\sin(\theta) \\ \sin(\theta) & \cos(\theta) \end{array}\end{pmatrix}.$$
+\item
+surjective but not injective,
+$$n=1, \, m=2 , \text{ and } A= \begin{pmatrix}1&0\end{pmatrix},$$
+this is the map
+$$T_A \left ( \begin{pmatrix} x \\ y\end{pmatrix} \right ) = (x).$$
+\item
+injective but not surjective,
+$$n=3, \, m=2, \text{ and } A= \begin{pmatrix}1&0\\0&1\\0&0\end{pmatrix},$$
+this is the map
+$$T_A \left ( \begin{pmatrix} x \\ y\end{pmatrix} \right ) = \begin{pmatrix} x \\ y\\ 0\end{pmatrix}.$$
+\item
+neither injective nor surjective,
+$$n=2, \, m=2, \text{ and } A= \begin{pmatrix}1&0\\0&0\end{pmatrix},$$
+this is the map
+$$T_A \left ( \begin{pmatrix} x \\ y\end{pmatrix} \right ) = \begin{pmatrix} x \\ 0\end{pmatrix}.$$
+\end{enumerate}
+
+\end{solution}
+\setcounter{pass}{\value{enumi}}
+\end{enumerate}
+
+\topic{Composition of functions  and inverses}
+\begin{enumerate}
+\setcounter{enumi}{\value{pass}}
+\item
+Consider the functions $f,g,h$, all $\mathbb{R} \to \mathbb{R}$, defined by the formulas
+$$f(x) = -2x -3, \quad g(x) = x^2 + 3x + 1, \quad h(x) = x/2.$$
+Find the formulas, simplified as far as possible, that represent the functions
+$f \circ g \circ h$, $g \circ f \circ h$, $h \circ g \circ f$, $f \circ f$, $g \circ g$ and $h \circ h$.
+\begin{sagesilent}
+var('x')
+f(x) = -2*x-3
+g(x)=x^2+3*x+1
+h(x)=x/2
+\end{sagesilent}
+\begin{solution}
+\begin{align*}
+(f \circ g \circ h)(x) &= f(g(h(x))) = \sage{f(g(h(x)))}\\
+(g \circ f \circ h)(x) &= g(f(h(x))) = \sage{expand(g(f(h(x))))}\\
+(h \circ g \circ f)(x) &= h(g(f(x))) = \sage{expand(h(g(f(x))))}\\
+(f \circ f)(x) &= f(f(x)) = \sage{expand(f(f(x)))}\\
+(g \circ g)(x) &= g(g(x)) = \sage{expand(g(g(x)))}\\
+(h \circ h)(x) &= h(h(x)) = \sage{expand(h(h(x)))}\\
+\end{align*}
+\end{solution}
+\item
+Can you compose your own relatively simple, but not trivial, examples to show that composition of functions is not commutative, i.e. that in general $f \circ g \neq g \circ f$?
+\item
+Consider the functions $f: (0,\infty) \to (0, \infty)$ and $g : (0,\infty) \to \mathbb{R}$ defined by
+$$f(x) = x^2, \quad g(x) = \log(x).$$
+Find the definitions of the functions $g \circ f$ and $(g \circ f)^{-1}$ and confirm in this case that $(g \circ f)^{-1} = f^{-1} \circ g^{-1}$.
+\begin{solution}
+\begin{align*}
+(g \circ f)(x) &= g(f(x)) = \log \left (x^2 \right ) = 2 \log(x)\\
+(g \circ f)^{-1}(x) &= e^{x/2} \\
+f^{-1}(x) &= x^{1/2}\\
+g^{-1}(x) &= e^x\\
+(f^{-1} \circ g^{-1})(x) &= f^{-1}(g^{-1}(x)) = \left ( e^x \right )^{1/2} = e^{x/2}
+\end{align*}
+\end{solution}
+\setcounter{pass}{\value{enumi}}
+\end{enumerate}
+
+\topic{Partial fractions}
+\begin{enumerate}
+\setcounter{enumi}{\value{pass}}
+\item
+Obtain the partial fraction expansions of the following rational function expressions
+\begin{enumerate}
+\item
+$$-\frac{13 \, t - 23}{2 \, {\left(3 \, t - 1\right)} {\left(t - 3\right)}},$$
+\begin{solution}
+$$-\frac{7}{2 \, {\left(3 \, t - 1\right)}} - \frac{1}{t - 3}$$
+\end{solution}
+\item
+$$-\frac{9 \, t^{2} + 10 \, t + 15}{3 \, {\left(t^{2} + 1\right)} {\left(3 \, t - 5\right)}},$$
+\begin{solution}
+$$\frac{2 \, t}{3 \, {\left(t^{2} + 1\right)}} - \frac{5}{3 \, t - 5}$$
+\end{solution}
+\item
+$$\frac{2 \, t^{2} - 11 \, t + 14}{{\left(5 \, t - 4\right)} {\left(t + 1\right)}^{2}},$$
+\begin{solution}
+$$\frac{2}{5 \, t - 4} - \frac{3}{{\left(t + 1\right)}^{2}}$$
+\end{solution}
+\item
+$$-\frac{25 \, t + 14}{{\left(2 \, t^{2} + 5 \, t + 5\right)} {\left(t - 4\right)}}.$$
+\begin{solution}
+$$\frac{4 \, t + 1}{2 \, t^{2} + 5 \, t + 5} - \frac{2}{t - 4}$$
+\end{solution}
+\end{enumerate}
+\end{enumerate}
+\end{document}
+
+%sagemathcloud={"latex_command":"latexmk -pdf -synctex=1 -interaction=nonstopmode 'tutorial-sheet-03-functions.tex'"}

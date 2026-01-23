@@ -1,0 +1,309 @@
+\documentclass[oneside,10pt]{amsart}
+% \usepackage[20pt]{extsizes}
+\usepackage[paper=a4paper,top=1.2cm, bottom=1.2cm,left=1cm,right=1cm]{geometry}
+\usepackage{setspace}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{sidenotes}
+\usepackage{hyperref}
+\usepackage{sagetex}
+\usepackage{mathtools}
+\setlength{\parindent}{0cm}
+
+%a background shaded textbox with white text. spans the width of the textarea
+\newcommand{\cbox}[1]{\colorbox{black}{\begin{minipage}{\linewidth}\color{white}\sffamily #1 \end{minipage}}}
+
+%tutorial sheet title
+\newcommand{\sheettitle}[1]{\colorbox{black}{\begin{minipage}{1.0073\linewidth}\color{white}\sffamily #1 \end{minipage}}}
+
+%sheet title banner, uses \cbox
+\newcommand{\tuttitle}[4]{\cbox{\textbf{#1} \hfill {#2}\\{#3} \hfill {\Small #4}}}
+
+%topic banner
+\newcommand{\topic}[1]{\cbox{\textbf{#1}}}
+
+%computer icon
+\newcommand{\comp}{\begin{marginfigure}\includegraphics[scale=0.08]{comp.png}\end{marginfigure}}
+
+% small vert skip
+\newcommand{\vvskip}{\vskip 3pt}
+
+% question number variable
+\newcounter{pass}
+
+%solution set-up
+\newif\ifshowanswers
+\showanswerstrue
+% \showanswersfalse
+
+\newcommand{\solution}[1]{\ifshowanswers{\newline\colorbox{black!20}{\begin{minipage}{\linewidth}\color{black}{#1}\end{minipage}}
+}\else\fi}
+
+%\usepackage{mathpazo}
+%\usepackage{arevtext,arevmath}
+%\usepackage[lining, sfdefault, light, medium]{FiraSans}
+%\usepackage{FiraMono}
+%\firalining
+
+\setlength\itemsep{3em}
+\begin{document}
+\colorbox{black}{\begin{minipage}{0.3\linewidth}\color{white}\sffamily \includegraphics[scale=0.2]{mmulogowhite} \end{minipage}
+\begin{minipage}{0.7\linewidth}\color{white}\sffamily
+\begin{flushright}
+\texttt{6G4Z3006} \textbf{Calculus}\\
+Department of Computing and Mathematics
+\end{flushright}
+\end{minipage}}
+
+\sheettitle{Tutorial sheet: Series \hfill Dr Killian O'Brien}
+
+\vvskip
+{\small When possible you should work on the questions in advance and be prepared for discussions on them with your colleagues and tutor. Some questions are straightforward calculation while others require more discussion and thought. The computer icon \includegraphics[scale=0.06]{comp.png} indicates where computer calculation or programming may be of use.
+Further questions can be found in the lecture notes as well as the recommended unit resources (see Moodle).}
+
+\vvskip
+\topic{Series notation and defining formulas}
+\begin{enumerate}
+\item \label{formulas}
+Write down some initial terms of the following series
+$$\text{(i)} \sum_{n=1}^\infty \frac{(-1)^n}{2n - 1},
+\quad \text{(ii)} \sum_{n=1}^\infty \frac{n+1}{n^3 + 2},
+\quad \text{(iii)} \sum_{n=1}^\infty \frac{3}{n!},
+\quad \text{(iv)} \sum_{n=1}^\infty \left (\sum_{i=1}^n i^{-2} \right ).
+$$
+\begin{sagesilent}
+var('n')
+a(n) = (-1)^n/(2*n - 1)
+b(n) = (n+1)/(n^3+2)
+c(n) = 3/(factorial(n))
+
+A=[a(i) for i in (1..6)]
+B=[b(i) for i in (1..6)]
+C=[c(i) for i in (1..6)]
+D=[sum(j^(-2) for j in range(1,n+1)) for n in (1..6)]
+\end{sagesilent}
+\solution{(i) $\sum_{n=1}^\infty \frac{(-1)^n}{2n - 1} = -1 + \frac{1}{3} - \frac{1}{5} + \frac{1}{7} - \frac{1}{9} + \dots$ \\
+(ii) $\sum_{n=1}^\infty \frac{n+1}{n^3 + 2} = \frac{2}{3} + \frac{3}{10} + \frac{4}{29} + \frac{5}{66} + \frac{6}{127} + \dots$\\
+(iii) $\sum_{n=1}^\infty \frac{3}{n!} = 3 + \frac{3}{2} + \frac{1}{2} + \frac{1}{8} + \frac{1}{40} + \dots $\\
+(iv) $ \sum_{n=1}^\infty \left (\sum_{i=1}^n i^{-2} \right )
+= \sage{D[0]}+\sage{D[1]}+\sage{D[2]}+\sage{D[3]}+\sage{D[4]}+\sage{D[5]}+\dots$}\\
+\setcounter{pass}{\value{enumi}}
+\end{enumerate}
+\vskip 2pt
+\topic{Series convergence definition}
+\begin{enumerate}
+\setcounter{enumi}{\value{pass}}
+\item
+Make sure you can accurately quote the definition of convergence for a series.
+\solution{The series $\sum_{n=1}^\infty a_n$ converges if and only if the associated sequence of partial sums, $\left \{ S_k \right \}_{k=1}^\infty$ where $S_k = \sum_{n=1}^k a_n$, converges. If $S_k \to S$ as $k \to \infty$ then we write $S = \sum_{n=1}^\infty a_n$. Otherwise we say that $\sum_{n=1}^\infty a_n$ diverges.}
+\item
+Can you confidently give the proof that the harmonic series $\sum_{j=1}^\infty 1/j$ diverges?
+\solution{See notes.}
+\item
+Can you prove the General Term Test using the definition of convergence?
+\solution{Suppose that $S = \sum_{n=1}^\infty a_n$, i.e. $S_k = \sum_{n=1}^k a_n \to S$ as $k \to \infty$. Note that $a_k = S_k - S_{k-1}$. Let $\epsilon > 0$ be given. By the convergence of the sequence $\{ S_k \}$ there exists a point $K$ such that for all $k \geq K$ we have $|S_k - S| < \frac{\epsilon}{2}$. Then for every $k \geq K+1$ we have
+$$|a_k| = |S_k - S_{k-1}| = |S_k - S - (S_{k-1} - S)| \leq |S_k - S| + |S_{k-1} - S| < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.$$ This proves the convergence of $a_k$ to 0 as $k \to \infty$.\\
+\textit{It's a good idea to use a diagram of the number line here to explain the choice of interval radius $\frac{\epsilon}{2}$ and explain the idea behind this.}}
+\setcounter{pass}{\value{enumi}}
+\end{enumerate}
+\vskip 2pt
+
+\topic{Geometric series test}
+\begin{enumerate}
+\setcounter{enumi}{\value{pass}}
+\item
+Ensure that you can derive the partial sum formula for a general geometric series of the form
+$$\sum_{n=1}^\infty a r^{n-1}.$$
+Can you then prove the convergence/divergence of this series for all possible combinations of values of the initial term $a$ and the common ratio $r$?
+\solution{Exploiting the structure of the terms of the geometric series we see that the partial sums $S_k$ satisfy
+$$S_k - rS_{k} = a - ar^k$$
+which implies that for $r \neq 1$ we have
+$$S_k = \frac{a(1-r^k)}{1-r} .$$
+Using this we can decide the convergence status of the geometric series.
+
+If $a=0$ then all terms are zero and the series is trivially convergent. So we assume $a \neq 0$ in the following.
+
+If $r=1$ then the series is $\sum_{n=1}^\infty a = a + a + a + \dots $ which is clearly divergent as $a \neq 0$.
+
+If $r=-1$ then the series is $\sum_{n=1}^\infty a(-1)^{n-1} = a - a + a - \dots $ which again is divergent as $a \neq 0$.
+
+In all other cases we can make use of the partial sums formula to say that
+$$S = \sum_{n=1}^\infty ar^{n-1} = \lim_{k \to \infty} S_k = \lim_{k \to \infty} \frac{a(1-r^k)}{1-r} .$$
+If $|r| > 1$ then the term $r^k$ is divergent and so the series is divergent also. If $|r|<1$ then the term $r^k$ is convergent to 0 and so the series is also convergent and
+$$S = \sum_{n=1}^\infty ar^{n-1} = \lim_{k \to \infty} S_k = \lim_{k \to \infty} \frac{a(1-r^k)}{1-r} = \frac{a}{1-r}.$$
+}
+\item
+Use the analysis of the ratio test to determine the convergence status and sum if possible, of the series
+$$\text{(i)} \, \,  \sum_{n=1}^\infty \frac{2}{3} \left ( \frac{1}{3} \right )^{n+1},
+\quad \text{(ii)} \, \, \sum_{n=1}^\infty 3 \left ( \frac{1}{2} \right )^n,
+\quad \text{(iii)}\, \,  \sum_{n=1}^\infty \frac{1}{5} \left ( \frac{6}{5} \right )^{n+2}.
+$$
+\begin{sagesilent}
+var('n')
+a = sum(2/3 * (1/3)^(n+1),n,1,oo)
+b = sum(3 * (1/2)^(n),n,1,oo)
+\end{sagesilent}
+\solution{
+We just need to adjust the term in each case to match the general form of the geometric series used in the previous question and then apply the convergence criteria and formula to get
+$$\text{(i)} \, \, \sage{a} , \quad \text{(ii)} \, \, \sage{b} , \quad \text{(iii) divergent}.$$
+}
+\item
+Consider the number $a$ with decimal expansion
+$$a = 0.1234123412341234 \dots ,$$
+continuing in the suggested way. Use the geometric series summation formula to express $a$ as a rational number, i.e. a ratio of integers.
+\begin{sagesilent}
+var('n')
+a = sum(1234/(10000^n),n,1,oo)
+\end{sagesilent}
+\solution{
+We can express $a$ in series form by
+$$a = \sum_{n=1}^\infty \frac{1234}{10000^n}.$$
+This is a convergent geometric series and applying the sum formula gives
+$$a = \sage{a}.$$
+}
+\setcounter{pass}{\value{enumi}}
+\end{enumerate}
+\vskip 2pt
+
+\topic{Application of the ratio test}
+\begin{enumerate}
+\setcounter{enumi}{\value{pass}}
+\item
+Determine the convergence or divergence of the series
+$$\sum_{m=0}^\infty \frac{2^m}{m!}.$$
+\solution{Writing $a_m$ for the series term the ratio of consecutive terms satisfies
+\begin{align*}
+\lim_{m \to \infty} \frac{a_{m+1}}{a_m} & = \lim_{m \to \infty} \left ( \frac{2^{m+1}}{(m+1)!} \frac{m!}{2^m} \right ) \\
+&= \lim_{m \to \infty} \frac{2}{m+1} \\
+& = 0.
+\end{align*}
+So by the ratio test the series $\sum a_m$ converges.
+}
+\item
+Determine the convergence or divergence of the series
+$$\sum_{m=0}^\infty \frac{2^m}{(m+1)^2}.$$
+\solution{Writing $a_m$ for the series term the ratio of consecutive terms satisfies
+\begin{align*}
+\lim_{m \to \infty} \frac{a_{m+1}}{a_m} & = \lim_{m \to \infty} \left ( \frac{2^{m+1}}{(m+2)^2} \frac{(m+1)^2}{2^m} \right ) \\
+&= \lim_{m \to \infty} 2 \left ( \frac{m+1}{m+2} \right )^2\\
+& = 2\lim_{m \to \infty} \left (1 -  \frac{1}{m+2} \right )^2\\
+& = 2, \text{ by the algebra of limits theorem for seqs.}
+\end{align*}
+So by the ratio test the series $\sum a_m$ diverges.
+}
+\item
+Does the ratio test give a conclusion about the series
+$$\sum_{n=1}^\infty \frac{n}{n+1}?$$
+If not, determine the convergence/divergence of this series by more direct means.
+\solution{Writing $a_n$ for the series term the ratio of consecutive terms satisfies
+\begin{align*}
+\lim_{n \to \infty} \frac{a_{n+1}}{a_n} & = \lim_{n \to \infty} \left ( \frac{n+1}{n+2} \frac{n+1}{n} \right ) \\
+&= \lim_{n \to \infty} \frac{n^2 + 2n + 1}{n^2 + 2n}\\
+&= \lim_{n \to \infty} \frac{1 + 2/n + 1/n^2}{1 + 2/n}\\
+& = 1.
+\end{align*}
+So the ratio test is inconclusive. Looking at the series again we notice that the terms do not converge to zero, in fact
+$$\lim_{n \to \infty} a_n = 1.$$
+So the series does not pass the General Term Test and so the series is divergent.
+}
+\setcounter{pass}{\value{enumi}}
+\end{enumerate}
+\topic{Application of comparison tests}
+\solution{I tend to prefer the application of the limit comparison test, but anything doable with the limit comparison test can normally be achieved with an equivalent use of the standard comparison test.}
+\begin{enumerate}
+\setcounter{enumi}{\value{pass}}
+\item
+Use a suitable comparison test to determine the convergence status of the series
+$$ \sum_{k=1}^\infty \frac{k^2 + 2}{k(k^2 + 5)}.$$
+\solution{The dominant behaviour of the term here is $k^2$ in the numerator and $k^3$ in the denominator so the we should compare to the term $1/k$ which is the term of a divergent series.
+
+Writing $a_k$ for the series term in the question and examining the limit of the ratio we get
+\begin{align*}
+\lim_{k \to \infty} \frac{a_k}{1/k}
+&= \lim_{k \to \infty} \left ( \frac{k^3 + 2k}{k^3 + 5k} \right )\\
+&=1
+\end{align*}
+So the series in question compares with the divergent harmonic series and so by the limit comparison test the series is also divergent.
+}
+\item
+Use a suitable comparison test to determine the convergence status of the series
+$$ \sum_{k=1}^\infty \frac{k+3}{k(k^2 + 2)}.$$
+\solution{The dominant behaviour of the term here is $k^1$ in the numerator and $k^3$ in the denominator so the we should compare to the term $1/k^2$ which is the term of a convergent series.
+
+Writing $a_k$ for the series term in the question and examining the limit of the ratio we get
+\begin{align*}
+\lim_{k \to \infty} \frac{a_k}{1/k^2}
+&= \lim_{k \to \infty} \left ( \frac{k^3 + 3k^2}{k^3 + 2k} \right )\\
+&=1
+\end{align*}
+So the series in question compares with a convergent series and so by the limit comparison test the series is also convergent.
+}
+\setcounter{pass}{\value{enumi}}
+\end{enumerate}
+\vskip 2pt
+
+\newpage
+\topic{Application of partial fraction expansions}
+\begin{sagesilent}
+var('n')
+a(n) = (9*n^2+33*n+12)/((n+4)*(n+3)*(n+1)*n)
+b(n) = 8/(n^2+6*n+5)
+c(n) = 9/(n^2+n - 2)
+d(n) = (11 - n)/(n^2+6*n+5)
+\end{sagesilent}
+\begin{enumerate}
+\setcounter{enumi}{\value{pass}}
+\item
+Consider the series $\sum_{n=1}^\infty a_n$ where the term is defined by
+$$a_n = \frac{{9 \, n^{2} + 33 \, n + 12}}{{\left(n + 4\right)} {\left(n + 3\right)} {\left(n + 1\right)} n}.$$
+Obtain the partial fraction expansion of $a_n$ and use this to obtain the sum of the series.
+\solution{
+The partial fraction expansion of $a_n$ is $\sage{a(n).partial_fraction(n)}$ and the sum of the series is $\sage{sum(a(n),n,1,oo)}$.
+}
+\item
+Consider the series $\sum_{n=1}^\infty b_n$ where the term is defined by
+$$b_n = \frac{8}{n^2 + 6n + 5}.$$
+Obtain the partial fraction expansion of $b_n$ and use this to obtain the sum of the series.
+\solution{
+The partial fraction expansion of $b_n$ is $\sage{b(n).partial_fraction(n)}$ and the sum of the series is $\sage{sum(b(n),n,1,oo)}$.
+}
+\item
+Consider the series $\sum_{n=2}^\infty c_n$ where the term is defined by
+$$c_n = \frac{9}{n^2 + n - 2}.$$
+Obtain the partial fraction expansion of $c_n$ and use this to obtain the sum of the series. (n.b. take note of the starting value of the index $n$)
+\solution{
+The partial fraction expansion of $c_n$ is $\sage{c(n).partial_fraction(n)}$ and the sum of the series is $\sage{sum(c(n),n,2,oo)}$.
+}
+\item
+Consider the series $\sum_{n=1}^\infty d_n$ where the term is defined by
+$$d_n = \frac{11 - n}{n^2 + 6n +5}.$$
+Obtain the partial fraction expansion of $d_n$ and use this to decide whether the series is convergent or divergent.
+\solution{
+The partial fraction expansion of $d_n$ is $\sage{d(n).partial_fraction(n)}$. Because the numerators are different we do not get complete cancellation. Considering the partial sum $S_k$ we see that
+$$S_k = \frac{3}{2}+\frac{3}{3} + \frac{3}{4} + \frac{3}{5}  - \left (\sum_{n=6}^{k+1} \frac{1}{n} \right ) -\frac{4}{k+2} - \frac{4}{k+3} - \frac{4}{k+4} - \frac{4}{k+5}.$$
+We see that $S_k$ contains, essentially, the partial sum of the harmonic series. Since the harmonic series diverges then so does the sequence $S_k$ and hence the series in question is divergent.
+
+Alternatively we can apply the limit comparison test to this series, comparing with the harmonic series, and this will also show that it is divergent.}
+\setcounter{pass}{\value{enumi}}
+\end{enumerate}
+\vskip 2pt
+
+% \topic{Computer work} \comp
+% \begin{enumerate}
+% \setcounter{enumi}{\value{pass}}
+% \item
+% You should ensure that you are able to use Matlab, Sage or similar programming language to build an array containing a specified number of initial terms of a series.
+% \item
+% You should then be able to build an array containing the partial sums of that series and plot them as visual aid to determining the long term behaviour of the series.
+% \item
+% Invetigate the capabilities of SageMath's \texttt{sum} command. Execute the command \texttt{sum?} in a CoCalc worksheet to see the manual page and examples for using it.
+% \item
+% Investigate the capabilities of Matlab's \texttt{symsum} command from its symbolic toolbox. See the information at \url{http://uk.mathworks.com/help/symbolic/symsum.html}.
+% \item
+% Apply these techniques to the series mentioned in this problem sheet, the questions in the lecture notes, etc
+% \setcounter{pass}{\value{enumi}}
+% \end{enumerate}
+\vskip 2pt
+\end{document}
+
+%sagemathcloud={"latex_command":"latexmk -pdf -synctex=1 -interaction=nonstopmode 'tutorial-sheet-02-series.tex'"}
