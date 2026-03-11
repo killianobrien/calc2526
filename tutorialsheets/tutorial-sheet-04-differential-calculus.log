@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2024.3.15)  25 FEB 2026 14:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2024.3.15)  11 MAR 2026 10:22
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -541,8 +541,8 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 286.
 )
 \Hy@SectionHShift=\skip194
-) (/usr/share/texmf/tex/latex/sagetex/sagetex.sty
-Package: sagetex 2019/11/14 v3.4 embedding Sage into LaTeX documents
+) (/home/killian/math/calc2526/tutorialsheets/sagetex.sty
+Package: sagetex 2021/10/16 v3.6 embedding Sage into LaTeX documents
  (/usr/share/texlive/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
 Package: fancyvrb 2020/01/13 v3.5 verbatim text (tvz,hv)
 \FV@CodeLineNo=\count320
@@ -1066,9 +1066,9 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 LaTeX Font Info:    Trying to load font information for U+msb on input line 22.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+) [1
 
-]
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 *********************************************************************
 [2]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 250.
@@ -1081,15 +1081,15 @@ Package rerunfilecheck Info: File `tutorial-sheet-04-differential-calculus.out' 
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 250.
  ) 
 Here is how much of TeX's memory you used:
- 28723 strings out of 483107
- 558327 string characters out of 5964630
- 898012 words of memory out of 5000000
- 43214 multiletter control sequences out of 15000+600000
- 536201 words of font info for 39 fonts, out of 8000000 for 9000
+ 28724 strings out of 483107
+ 558341 string characters out of 5964630
+ 899085 words of memory out of 5000000
+ 43217 multiletter control sequences out of 15000+600000
+ 535848 words of font info for 38 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 72i,11n,107p,1107b,428s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 72i,10n,107p,1107b,428s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on /home/killian/math/calc2526/tutorialsheets/tutorial-sheet-04-differential-calculus.pdf (2 pages, 120188 bytes).
+Output written on /home/killian/math/calc2526/tutorialsheets/tutorial-sheet-04-differential-calculus.pdf (2 pages, 120243 bytes).
 PDF statistics:
  122 PDF objects out of 1000 (max. 8388607)
  82 compressed objects within 1 object stream

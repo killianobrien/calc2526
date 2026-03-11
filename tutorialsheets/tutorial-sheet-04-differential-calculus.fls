@@ -105,8 +105,8 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
-INPUT /usr/share/texmf/tex/latex/sagetex/sagetex.sty
-INPUT /usr/share/texmf/tex/latex/sagetex/sagetex.sty
+INPUT /home/killian/math/calc2526/tutorialsheets/sagetex.sty
+INPUT /home/killian/math/calc2526/tutorialsheets/sagetex.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
@@ -323,7 +323,6 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsl10.tfm
 INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
 INPUT /home/killian/math/calc2526/tutorialsheets/tutorial-sheet-04-differential-calculus.aux
 INPUT /home/killian/math/calc2526/tutorialsheets/tutorial-sheet-04-differential-calculus.out
